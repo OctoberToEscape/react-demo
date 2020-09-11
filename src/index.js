@@ -29,42 +29,36 @@ import "./index.css";
 class Parent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            title: null,
-        };
+        this.state = {};
     }
     render() {
         return (
             <div>
-                <h1>子元素传递给父元素的数据：{this.state.title}</h1>
-                <Child changeTitle={this.changeTitle} />
-            </div>
-        );
-    }
-    changeTitle = (title) => {
-        this.setState({ title });
-    };
-}
+                <form action='https://www.baidu.com'>
+                    <div className='child'>
+                        <h1>hello world</h1>
+                        <button onClick={this.parentEvent}>阻止默认行为</button>
+                    </div>
+                </form>
 
-class Child extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            msg: "我是你爹",
-        };
-    }
-    render() {
-        return (
-            <div>
                 <button
-                    onClick={() => {
-                        this.props.changeTitle(this.state.msg);
+                    onClick={(e) => {
+                        this.parentEvents(123, e);
                     }}>
-                    给父元素传递数据
+                    查看
                 </button>
             </div>
         );
     }
+
+    parentEvent = (e) => {
+        e.preventDefault();
+    };
+
+    parentEvents = (num, e) => {
+        console.log(num);
+        console.log(e);
+    };
 }
 
 ReactDOM.render(<Parent />, document.querySelector("#root"));
