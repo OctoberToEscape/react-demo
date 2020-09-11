@@ -34,53 +34,62 @@ class TabComponent extends React.Component {
         };
     }
     eventClick(val) {
-        if (val === 1) this.setState({ isActive: true });
-        else this.setState({ isActive: false });
+        console.log(document.querySelector(".box3").scrollTop);
+        if (val === 1)
+            document.querySelector(".box1").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+            });
+        else if (val === 2)
+            document.querySelector(".box2").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+            });
+        else if (val === 3)
+            document.querySelector(".box3").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+            });
+        else
+            document.querySelector(".box4").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest",
+            });
     }
     render() {
         return (
             <div>
-                <button onClick={this.eventClick.bind(this, 1)}>内容1</button>
-                <button onClick={this.eventClick.bind(this, 2)}>内容2</button>
+                <button onClick={this.eventClick.bind(this, 1)}>问答</button>
+                <button onClick={this.eventClick.bind(this, 2)}>圈子</button>
+                <button onClick={this.eventClick.bind(this, 3)}>课程</button>
+                <button onClick={this.eventClick.bind(this, 4)}>直播</button>
                 {/* 下方内容 */}
                 <div
-                    style={{ display: this.state.isActive ? "block" : "none" }}>
-                    展示内容1的内容1
+                    className='box1'
+                    style={{ background: "#ccc", height: "1000px" }}>
+                    问答
                 </div>
                 <div
-                    style={{
-                        display: this.state.isActive ? "none" : "block",
-                    }}>
-                    展示内容2的内容2
+                    className='box2'
+                    style={{ background: "red", height: "1000px" }}>
+                    圈子
+                </div>
+                <div
+                    className='box3'
+                    style={{ background: "yellow", height: "1000px" }}>
+                    课程
+                </div>
+                <div
+                    className='box4'
+                    style={{ background: "blue", height: "1000px" }}>
+                    直播
                 </div>
             </div>
         );
-    }
-}
-
-class ClockComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            time: new Date().toLocaleTimeString(),
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>当前时间：{this.state.time}</h1>
-            </div>
-        );
-    }
-
-    //完成渲染完成
-    componentDidMount() {
-        setInterval(() => {
-            this.setState({
-                time: new Date().toLocaleTimeString(),
-            });
-        }, 1000);
     }
 }
 
