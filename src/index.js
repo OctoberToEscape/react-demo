@@ -26,46 +26,45 @@ import "./index.css";
 
 // ReactDOM.render(element, document.querySelector("#root"));
 
-class ParentCom extends React.Component {
+class Parent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isActive: true,
+            title: null,
         };
     }
-    changeActive() {
-        this.setState({
-            isActive: !this.state.isActive,
-        });
-    }
-
     render() {
         return (
             <div>
-                <button onClick={this.changeActive.bind(this)}>
-                    控制子元素显示
-                </button>
-                <ChildCom isActive={this.state.isActive} />
+                <h1>子元素传递给父元素的数据：{this.state.title}</h1>
+                <Child changeTitle={this.changeTitle} />
             </div>
         );
     }
+    changeTitle = (title) => {
+        this.setState({ title });
+    };
 }
 
-class ChildCom extends React.Component {
+class Child extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            msg: "我是你爹",
+        };
     }
-
     render() {
-        let activeClass = null;
-        activeClass = this.props.isActive ? "active" : "";
-
         return (
-            <div className={"content " + activeClass}>
-                <h1>我是子元素</h1>
+            <div>
+                <button
+                    onClick={() => {
+                        this.props.changeTitle(this.state.msg);
+                    }}>
+                    给父元素传递数据
+                </button>
             </div>
         );
     }
 }
 
-ReactDOM.render(<ParentCom />, document.querySelector("#root"));
+ReactDOM.render(<Parent />, document.querySelector("#root"));
