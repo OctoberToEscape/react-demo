@@ -36,6 +36,32 @@ class Parent extends React.Component {
                     }}>
                     查看更多
                 </button>
+                <form action='https://www.baidu.com'>
+                    <div className='child'>
+                        <h1>hello world</h1>
+                        <button onClick={this.parentEvent}>阻止默认行为</button>
+                    </div>
+                </form>
+
+                <button
+                    onClick={(e) => {
+                        this.parentEvents(123, e);
+                    }}>
+                    查看更多
+                </button>
+                <form action='https://www.baidu.com'>
+                    <div className='child'>
+                        <h1>hello world</h1>
+                        <button onClick={this.parentEvent}>阻止默认行为</button>
+                    </div>
+                </form>
+
+                <button
+                    onClick={(e) => {
+                        this.parentEvents(123, e);
+                    }}>
+                    查看更多
+                </button>
             </div>
         );
     }
